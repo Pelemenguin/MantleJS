@@ -20,7 +20,7 @@ public class BookBuilder {
     /**
      * Set the book's repositories' paths
      */
-    @Info("Set the book's repositories' paths.")
+    @Info("Set the book's repositories' paths.\n\nFor example, If you have book contents under `kubejs/assets/kubejs/book/test/`, then you should use `.setBookRepositories(\"kubejs:book/test\")`")
     public BookBuilder setBookRepositories(ResourceLocation... repositories) {
         BookRepository[] bookRepositories = new BookRepository[repositories.length];
         for (int r = 0; r < repositories.length; r++) {
