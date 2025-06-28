@@ -18,11 +18,14 @@ If you want to play this mod in advance, you can build from source.
 
 ### Mantle book
 
+Currently, created books can only be accessed by `/mantle book open`.
+
 #### Basics
 
 You can use script below to register your own book.
 
 ```javascript
+// Script type: STARTUP
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book") // Specify the book ID
         .addBookRepository("kubejs:book/example_book") // Specify the book repository
@@ -31,8 +34,8 @@ MantleJSEvents.bookRegistry(event => {
 ```
 
 The script above creates a book of which the ID is `kubejs:example_book`.
-The `addBookRepository` method sets the book repository of the book,
-you can then put resources under the folder `kubejs/asets/kubejs/book/example`.
+The `addBookRepository()` method sets the book repository of the book,
+you can then put resources under the folder `kubejs/asets/kubejs/book/example_book/`.
 For resources formats, see [Tinker's Construct's GitHub repository](https://github.com/SlimeKnights/TinkersConstruct) or their mod file.
 
 #### Transformers
@@ -44,6 +47,7 @@ For example, use the script below to enable Tinker's Construct's `TierRangeMater
 which is used in Tinker's Construct to display the material list.
 
 ```javascript
+// Script type: STARTUP
 const TierRangeMaterialSectionTransformer = Java.loadClass("slimeknights.tconstruct.library.client.book.sectiontransformer.materials.TierRangeMaterialSectionTransformer")
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book")
