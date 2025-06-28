@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import pelemenguin.mantlejs.MantleJS;
 import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.data.BookData;
+import slimeknights.mantle.client.book.repository.BookRepository;
+import slimeknights.mantle.client.book.transformer.BookTransformer;
 
 public class BookInitialization extends BookData {
 
@@ -15,7 +17,10 @@ public class BookInitialization extends BookData {
     public static void initBook() {
         for (ResourceLocation r : BookDataJS.BOOKS.keySet()) {
             BookDataJS bookDataJS = BookDataJS.BOOKS.get(r);
-            BookData bookData = BookLoader.registerBook(r, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories);
+            BookData bookData = BookLoader.registerBook(r, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories.toArray(new BookRepository[0]));
+            for (BookTransformer t : bookDataJS.bookTransformers) {
+                bookData.addTransformer(t);
+            }
             MANTLEJS_BOOKS.put(r, bookData);
             MantleJS.LOGGER.info("Book registered: "+r.toString());
         }

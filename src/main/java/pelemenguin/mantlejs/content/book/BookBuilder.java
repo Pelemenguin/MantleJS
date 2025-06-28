@@ -1,15 +1,20 @@
 package pelemenguin.mantlejs.content.book;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
 import pelemenguin.mantlejs.MantleJS;
 import slimeknights.mantle.client.book.repository.BookRepository;
 import slimeknights.mantle.client.book.repository.FileRepository;
+import slimeknights.mantle.client.book.transformer.BookTransformer;
 
 public class BookBuilder {
 
     public ResourceLocation id;
-    public BookRepository[] bookRepositories;
+    public List<BookRepository> bookRepositories = new ArrayList<BookRepository>();
+    public List<BookTransformer> bookTransformers = new ArrayList<BookTransformer>();
     public boolean appendIndex = true;
     public boolean appendContentTable = true;
     
@@ -18,15 +23,20 @@ public class BookBuilder {
     }
 
     /**
-     * Set the book's repositories' paths
+     * Add a book repository
      */
-    @Info("Set the book's repositories' paths.\n\nFor example, If you have book contents under `kubejs/assets/kubejs/book/test/`, then you should use `.setBookRepositories(\"kubejs:book/test\")`")
-    public BookBuilder setBookRepositories(ResourceLocation... repositories) {
-        BookRepository[] bookRepositories = new BookRepository[repositories.length];
-        for (int r = 0; r < repositories.length; r++) {
-            bookRepositories[r] = new FileRepository(repositories[r]);
-        }
-        this.bookRepositories = bookRepositories;
+    @Info("Add a book repository.\n\nFor example, If you have book contents under `kubejs/assets/kubejs/book/test/`, then you should use `.setBookRepositories(\"kubejs:book/test\")`")
+    public BookBuilder addBookRepository(ResourceLocation repository) {
+        this.bookRepositories.add(new FileRepository(repository));
+        return this;
+    }
+
+    /**
+     * Add a book transformer
+     */
+    @Info("Add a book transformer.")
+    public BookBuilder addTransformer(BookTransformer transformer) {
+        this.bookTransformers.add(transformer);
         return this;
     }
 
@@ -62,9 +72,6 @@ public class BookBuilder {
      */
     @Info("Build the book.\n\nAfter building the book, you can still continue modifying and create more books.\nIf you want to continue modifying, you should chain a `id()` after this to give it a different id.")
     public BookBuilder build() {
-        if (this.bookRepositories == null) {
-            this.bookRepositories = new BookRepository[0];
-        }
         MantleJS.LOGGER.info("A `build()` is called! id: ", this.id.toString());
         new BookDataJS(this);
         return this;
