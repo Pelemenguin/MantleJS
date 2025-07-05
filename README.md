@@ -2,7 +2,9 @@
 
 **The mod's source code is protected under MIT License.**
 
-**When using the mod's source code, include a copy of [the license](./LICENSE).**
+Adding the mod to your modpack is currently **not** allowed,
+for this mod is still working in progress.
+As soon as the first release is published, whoever can use it in their modpack.
 
 ## What is this mod for?
 
@@ -18,8 +20,6 @@ If you want to play this mod in advance, you can build from source.
 
 ### Mantle book
 
-Currently, created books can only be accessed by `/mantle book open`.
-
 #### Basics
 
 You can use script below to register your own book.
@@ -29,7 +29,6 @@ You can use script below to register your own book.
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book") // Specify the book ID
         .addBookRepository("kubejs:book/example_book") // Specify the book repository
-        .build()
 })
 ```
 
@@ -42,8 +41,7 @@ For resources formats, see [Tinker's Construct's GitHub repository](https://gith
 
 You can add Book Transformers to further customize your book.
 
-
-For example, use the script below to enable Tinker's Construct's `TierRangeMaterialSectionTransformer`,
+For example, use the script below to enable Tinker's Construct's `TierRangeMaterialSectionTransformer` (Tinker's Construct is required if you want to use this),
 which is used in Tinker's Construct to display the material list.
 
 ```javascript
@@ -53,8 +51,23 @@ MantleJSEvents.bookRegistry(event => {
     event.create("example_book")
         .addBookRepository("kubejs:book/example_book")
         .addTransformer(TierRangeMaterialSectionTransformer.INSTANCE)
-        .build()
 })
 ```
 
 Further customization of `BookTransformer` is still developing.
+
+#### Book Items
+
+MantleJS added a new item type `tconstruct:book` to create.
+
+```javascript
+StartupEvents.registry('item', event => {
+    event.create('test_book', 'tconstruct:book')
+        .setBookData('example_book')
+})
+```
+
+The method `setBookData(id)` is used to set the book's data.
+The ID must be the same as the one you have registered in the `MantleJSEvents.bookRegistry` event.
+
+Thus, you can open the book via a specified item in the game.
