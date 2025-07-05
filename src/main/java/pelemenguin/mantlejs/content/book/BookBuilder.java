@@ -1,25 +1,31 @@
 package pelemenguin.mantlejs.content.book;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dev.latvian.mods.kubejs.KubeJS;
 import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
-import pelemenguin.mantlejs.MantleJS;
+import pelemenguin.mantlejs.content.book.transformer.BuiltinTransformer;
 import slimeknights.mantle.client.book.repository.BookRepository;
 import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.mantle.client.book.transformer.BookTransformer;
 
 public class BookBuilder {
 
-    public ResourceLocation id;
+    public static final Map<String, BookBuilder> BOOK_BUILDERS = new HashMap<>();
+
+    public String id;
     public List<BookRepository> bookRepositories = new ArrayList<BookRepository>();
     public List<BookTransformer> bookTransformers = new ArrayList<BookTransformer>();
     public boolean appendIndex = true;
     public boolean appendContentTable = true;
     
     public BookBuilder(String id) {
-        this.id = MantleJS.createKubeJSLocation(id);
+        this.id = KubeJS.appendModId(id);
+        BOOK_BUILDERS.put(this.id, this);
     }
 
     /**
@@ -34,9 +40,13 @@ public class BookBuilder {
     /**
      * Add a book transformer
      */
-    @Info("Add a book transformer.")
+    @Info("Add a book transformer.\n\nYou need to `Java.loadClass()` yourself if you want to use this method. Otherwise use `addTransformer(MantleTransformer)`")
     public BookBuilder addTransformer(BookTransformer transformer) {
         this.bookTransformers.add(transformer);
+        return this;
+    }
+    @Info("Add a book transformer")
+    public BookBuilder addTransformer(BuiltinTransformer transformer) {
         return this;
     }
 
@@ -61,19 +71,10 @@ public class BookBuilder {
     /**
      * Set the id.
      */
-    @Info("Set the id of the book. Prefix `kubejs` will be automatically added.\n\nThis is used when you want to continue modifying after `build()`. After modification, call another `build()` to create a new book.")
+    @Info("Reset the id of the book.")
     public BookBuilder id(String newId) {
-        this.id = MantleJS.createKubeJSLocation(newId);
-        return this;
-    }
-
-    /**
-     * Build the book.
-     */
-    @Info("Build the book.\n\nAfter building the book, you can still continue modifying and create more books.\nIf you want to continue modifying, you should chain a `id()` after this to give it a different id.")
-    public BookBuilder build() {
-        MantleJS.LOGGER.info("A `build()` is called! id: ", this.id.toString());
-        new BookDataJS(this);
+        // this.id = MantleJS.createKubeJSLocation(newId);
+        this.id = KubeJS.appendModId(newId);
         return this;
     }
 

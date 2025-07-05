@@ -4,12 +4,11 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import dev.latvian.mods.kubejs.KubeJS;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import pelemenguin.mantlejs.event.book.BookRegistryListener;
+import pelemenguin.mantlejs.event.book.BookRegistryHandler;
 
 @SuppressWarnings("removal")
 @Mod(MantleJS.MODID)
@@ -20,15 +19,11 @@ public class MantleJS {
 
     public MantleJS() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.register(BookRegistryListener.class);
+        eventBus.register(BookRegistryHandler.class);
     }
 
     public static ResourceLocation createLocation(String id) {
         return new ResourceLocation(MantleJS.MODID, id);
-    }
-
-    public static ResourceLocation createKubeJSLocation(String id) {
-        return new ResourceLocation(KubeJS.MOD_ID, id);
     }
 
 }

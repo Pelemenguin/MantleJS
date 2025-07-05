@@ -5,7 +5,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import pelemenguin.mantlejs.content.book.BookInitialization;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 
-public class BookRegistryListener {
+public class BookRegistryHandler {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         BookRegisterEventJS eventJs = new BookRegisterEventJS();
