@@ -15,13 +15,14 @@ public class BookInitialization extends BookData {
     public static final Map<ResourceLocation, BookData> MANTLEJS_BOOKS = new HashMap<>();
     
     public static void initBook() {
-        for (ResourceLocation r : BookDataJS.BOOKS.keySet()) {
-            BookDataJS bookDataJS = BookDataJS.BOOKS.get(r);
-            BookData bookData = BookLoader.registerBook(r, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories.toArray(new BookRepository[0]));
+        for (String r : BookBuilder.BOOK_BUILDERS.keySet()) {
+            ResourceLocation loc = ResourceLocation.parse(r);
+            BookBuilder bookDataJS = BookBuilder.BOOK_BUILDERS.get(r);
+            BookData bookData = BookLoader.registerBook(loc, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories.toArray(new BookRepository[0]));
             for (BookTransformer t : bookDataJS.bookTransformers) {
                 bookData.addTransformer(t);
             }
-            MANTLEJS_BOOKS.put(r, bookData);
+            MANTLEJS_BOOKS.put(loc, bookData);
             MantleJS.LOGGER.info("Book registered: "+r.toString());
         }
         MantleJS.LOGGER.info("Book registration complete!");
