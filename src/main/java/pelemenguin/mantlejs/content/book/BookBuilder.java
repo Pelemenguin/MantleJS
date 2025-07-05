@@ -78,10 +78,4 @@ public class BookBuilder {
         return this;
     }
 
-    @Info("Add an item for the book.\n\nThe item must be created by KubeJS via `StartupEvents.registry('item', event => {event.create('YOUR_ITEM_ID', 'tconstruct:book')})`.")
-    public BookBuilder addItem(String id) {
-        this.items.add(KubeJS.appendModId(id));
-        return this;
-    }
-
 }

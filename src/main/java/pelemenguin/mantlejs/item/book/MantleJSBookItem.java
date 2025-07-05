@@ -3,29 +3,37 @@ package pelemenguin.mantlejs.item.book;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
-import pelemenguin.mantlejs.content.book.BookInitialization;
+import pelemenguin.mantlejs.content.book.RegisteredMantleJSBook;
+import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.item.LecternBookItem;
 
 @ParametersAreNonnullByDefault
 public class MantleJSBookItem extends LecternBookItem {
 
+    private ResourceLocation bookDataLocation;
     private BookData bookData;
 
-    public MantleJSBookItem(Properties properties) {
+    public MantleJSBookItem(Properties properties, ResourceLocation bookDataLocation) {
         super(properties);
+        this.bookDataLocation = bookDataLocation;
+    }
+
+    public ResourceLocation getBookDataLocation() {
+        return this.bookDataLocation;
     }
 
     public BookData getBookData() {
-        if (this.bookData == null) {
-            this.bookData = BookInitialization.BOOK_ITEMS.get(ForgeRegistries.ITEMS.getKey(this));
+        // return bookData == null ? (BookInitialization.MANTLEJS_BOOKS.containsKey(this.bookDataLocation) ? BookInitialization.MANTLEJS_BOOKS.get(this.bookDataLocation) : ) : 
+        if (bookData == null) {
+            this.bookData = RegisteredMantleJSBook.MANTLEJS_BOOKS.containsKey(this.bookDataLocation) ? RegisteredMantleJSBook.MANTLEJS_BOOKS.get(this.bookDataLocation) : BookLoader.registerBook(this.bookDataLocation);
         }
         return this.bookData;
     }
