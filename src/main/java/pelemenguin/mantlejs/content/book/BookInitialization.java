@@ -13,9 +13,12 @@ import slimeknights.mantle.client.book.transformer.BookTransformer;
 public class BookInitialization extends BookData {
 
     public static final Map<ResourceLocation, BookData> MANTLEJS_BOOKS = new HashMap<>();
+    public static final Map<ResourceLocation, BookData> BOOK_ITEMS = new HashMap<ResourceLocation, BookData>();
     
     public static void initBook() {
         for (String r : BookBuilder.BOOK_BUILDERS.keySet()) {
+
+            // Book Data and Transformers
             ResourceLocation loc = ResourceLocation.parse(r);
             BookBuilder bookDataJS = BookBuilder.BOOK_BUILDERS.get(r);
             BookData bookData = BookLoader.registerBook(loc, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories.toArray(new BookRepository[0]));
@@ -23,7 +26,14 @@ public class BookInitialization extends BookData {
                 bookData.addTransformer(t);
             }
             MANTLEJS_BOOKS.put(loc, bookData);
+
+            // Book Items
+            for (String i : bookDataJS.items) {
+                BOOK_ITEMS.put(ResourceLocation.parse(i), bookData);
+            }
+
             MantleJS.LOGGER.info("Book registered: "+r.toString());
+
         }
         MantleJS.LOGGER.info("Book registration complete!");
     }

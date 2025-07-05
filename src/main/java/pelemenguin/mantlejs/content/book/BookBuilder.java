@@ -20,6 +20,7 @@ public class BookBuilder {
     public String id;
     public List<BookRepository> bookRepositories = new ArrayList<BookRepository>();
     public List<BookTransformer> bookTransformers = new ArrayList<BookTransformer>();
+    public List<String> items = new ArrayList<String>();
     public boolean appendIndex = true;
     public boolean appendContentTable = true;
     
@@ -73,8 +74,13 @@ public class BookBuilder {
      */
     @Info("Reset the id of the book.")
     public BookBuilder id(String newId) {
-        // this.id = MantleJS.createKubeJSLocation(newId);
         this.id = KubeJS.appendModId(newId);
+        return this;
+    }
+
+    @Info("Add an item for the book.\n\nThe item must be created by KubeJS via `StartupEvents.registry('item', event => {event.create('YOUR_ITEM_ID', 'tconstruct:book')})`.")
+    public BookBuilder addItem(String id) {
+        this.items.add(KubeJS.appendModId(id));
         return this;
     }
 
