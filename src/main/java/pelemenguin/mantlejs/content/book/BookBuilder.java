@@ -8,7 +8,7 @@ import java.util.Map;
 import dev.latvian.mods.kubejs.KubeJS;
 import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
-import pelemenguin.mantlejs.content.book.transformer.BuiltinTransformer;
+import pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer;
 import slimeknights.mantle.client.book.repository.BookRepository;
 import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.mantle.client.book.transformer.BookTransformer;
@@ -41,13 +41,15 @@ public class BookBuilder {
     /**
      * Add a book transformer
      */
-    @Info("Add a book transformer.\n\nYou need to `Java.loadClass()` yourself if you want to use this method. Otherwise use `addTransformer(MantleTransformer)`")
-    public BookBuilder addTransformer(BookTransformer transformer) {
-        this.bookTransformers.add(transformer);
+    @Info("Add a book transformer created in `MantleJSEvents.transformerRegistry`")
+    public BookBuilder addTransformer(String transformerId) {
+        this.bookTransformers.add(new MantleJSTransformer(ResourceLocation.parse(KubeJS.appendModId(transformerId))));
         return this;
     }
-    @Info("Add a book transformer")
-    public BookBuilder addTransformer(BuiltinTransformer transformer) {
+
+    @Info("Add a book transformer from a Java class.\n\nThis should be used together with `Java.loadClass()` for advanced customization.")
+    public BookBuilder addJavaTransformer(BookTransformer bookTransformer) {
+        this.bookTransformers.add(bookTransformer);
         return this;
     }
 
@@ -66,15 +68,6 @@ public class BookBuilder {
     @Info("Disables content table.")
     public BookBuilder noContentTable() {
         this.appendContentTable = false;
-        return this;
-    }
-
-    /**
-     * Set the id.
-     */
-    @Info("Reset the id of the book.")
-    public BookBuilder id(String newId) {
-        this.id = KubeJS.appendModId(newId);
         return this;
     }
 
