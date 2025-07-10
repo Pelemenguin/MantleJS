@@ -2,7 +2,7 @@ package pelemenguin.mantlejs.content.book.transformer;
 
 import slimeknights.mantle.client.book.transformer.BookTransformer;
 
-public class BuiltinTransformer {
+public interface BuiltinTransformer {
     
     public static BookTransformer indexTranformer() {
         return BookTransformer.indexTranformer();
