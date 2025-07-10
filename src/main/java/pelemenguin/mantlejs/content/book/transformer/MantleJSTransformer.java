@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.resources.ResourceLocation;
-import pelemenguin.mantlejs.content.book.transformer.data.BookDataJS;
+import pelemenguin.mantlejs.content.book.data.BookDataJS;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.transformer.BookTransformer;
 

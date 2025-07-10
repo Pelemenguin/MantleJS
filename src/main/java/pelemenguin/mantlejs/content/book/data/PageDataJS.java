@@ -1,4 +1,4 @@
-package pelemenguin.mantlejs.content.book.transformer.data;
+package pelemenguin.mantlejs.content.book.data;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -7,6 +7,8 @@ import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import slimeknights.mantle.client.book.data.PageData;
+import slimeknights.mantle.client.book.data.content.PageContent;
+import slimeknights.mantle.client.book.repository.BookRepository;
 
 @ParametersAreNonnullByDefault
 public class PageDataJS {
@@ -30,6 +32,19 @@ public class PageDataJS {
             this.parent = this.origin.parent == null ? null : new SectionDataJS(this.origin.parent);
         }
         return this.parent;
+    }
+
+    @Info("Get the source repository of the page.")
+    public BookRepository getSource() {
+        return this.origin.source;
+    }
+
+    @Info("Get the content of the page.")
+    public PageContent getContent() {
+        return this.origin.content;
+    }
+    public void setContent(PageContent content) {
+        this.origin.content = content;
     }
 
     public String translate(String string) {
@@ -58,6 +73,9 @@ public class PageDataJS {
 
     public ResourceLocation getType() {
         return this.origin.type;
+    }
+    public void setType(ResourceLocation type) {
+        this.origin.type = type;
     }
 
     public String getData() {

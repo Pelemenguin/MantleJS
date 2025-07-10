@@ -1,7 +1,8 @@
-package pelemenguin.mantlejs.content.book.transformer.data;
+package pelemenguin.mantlejs.content.book.data;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import slimeknights.mantle.client.book.data.PageData;
 import slimeknights.mantle.client.book.data.SectionData;
+import slimeknights.mantle.client.book.data.content.ContentBlank;
 import slimeknights.mantle.client.book.data.element.ImageData;
 import slimeknights.mantle.client.book.repository.BookRepository;
 import slimeknights.mantle.client.screen.book.BookScreen;
@@ -29,6 +31,15 @@ public class SectionDataJS {
     public SectionDataJS(SectionData origin, @Nullable BookDataJS parent) {
         this.origin = origin;
         this.parent = parent;
+    }
+
+    // MantleJS Custom
+
+    public void addPage(Consumer<PageDataJS> builder) {
+        PageDataJS raw = new PageDataJS(new PageData(false), this);
+        raw.setContent(new ContentBlank());
+        builder.accept(raw);
+        this.origin.pages.add(raw.origin);
     }
 
     @Nullable

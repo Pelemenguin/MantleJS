@@ -6,9 +6,10 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import pelemenguin.mantlejs.MantleJS;
 import pelemenguin.mantlejs.content.book.BookInitialization;
+import pelemenguin.mantlejs.content.book.data.PageType;
 import pelemenguin.mantlejs.content.book.transformer.TransformerInitialization;
-import pelemenguin.mantlejs.content.book.transformer.data.PageType;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 import slimeknights.mantle.client.book.data.content.ContentBlank;
 import slimeknights.mantle.client.book.data.content.ContentBlockInteraction;
@@ -65,6 +66,7 @@ public class BookRegistryHandler implements ResourceManagerReloadListener {
 
     @Override
     public void onResourceManagerReload(ResourceManager p_10758_) {
+        MantleJS.LOGGER.info("MantleJS reloading...");
         init();
     }
 }

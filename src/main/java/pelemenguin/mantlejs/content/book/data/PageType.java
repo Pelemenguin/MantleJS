@@ -1,4 +1,4 @@
-package pelemenguin.mantlejs.content.book.transformer.data;
+package pelemenguin.mantlejs.content.book.data;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import pelemenguin.mantlejs.content.book.transformer.data.BookDataJS;
+import pelemenguin.mantlejs.content.book.data.BookDataJS;
 
 public class TransformerBuilder {
 
