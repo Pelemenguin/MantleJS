@@ -103,8 +103,6 @@ Use a consumer as the operation for the Page Content.
 
 ```javascript
 // Script type: STARTUP
-const TextData = Java.loadClass("slimeknights.mantle.client.book.data.element.TextData")
-
 MantleJSEvents.transformerRegistry(event => {
     event.create('add_blank_pages')
         .transform(bookData => {
@@ -112,7 +110,7 @@ MantleJSEvents.transformerRegistry(event => {
                 section.addPage(page => {
                     page.setType("mantle:text");
                     page.setContent(BookPage.ofType("mantle:text"), content => {
-                        content.text = [new TextData("Text test")]
+                        content.text = [BookTextData.literal("Text test")];
                     });
                 });
             })
@@ -126,6 +124,7 @@ The consumer `content => {}` is for Page Content's initializion.
 > 💡 **Note**
 >
 > `TextData` is used to represent texts shown in Mantle's books.
+> In KubeJS, use `BookTextData.literal()` to create it.
 >
 > Property `content.text` is an Array, you can not simply set it to a `TextData` object.
 >

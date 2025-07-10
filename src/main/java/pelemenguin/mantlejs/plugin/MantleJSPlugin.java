@@ -5,6 +5,7 @@ import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import pelemenguin.mantlejs.content.book.BookPageInterface;
 import pelemenguin.mantlejs.content.book.transformer.BuiltinTransformer;
+import pelemenguin.mantlejs.content.book.util.TextDataInterface;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 import pelemenguin.mantlejs.item.book.BookItemBuilder;
 
@@ -24,6 +25,7 @@ public class MantleJSPlugin extends KubeJSPlugin {
     public void registerBindings(BindingsEvent event) {
         event.add("BuiltinTransformer", BuiltinTransformer.class);
         event.add("BookPage", BookPageInterface.class);
+        event.add("BookTextData", TextDataInterface.class);
    }
 
 }
