@@ -55,6 +55,8 @@ So Tinker's Construct made this by creating a Book Transformer.
 We will not use a complicated example here.
 For the first example, we add 5 blank pages after each section.
 
+###### Basic example
+
 ```javascript
 // Script type: STARTUP
 MantleJSEvents.transformerRegistry(event => {
@@ -62,10 +64,9 @@ MantleJSEvents.transformerRegistry(event => {
         .transform(bookData => {
             bookData.sections.forEach(section => {
                 for (let i = 0; i < 5; i++) {
-                    let ContentBlank = BookPage.getClass("mantle:blank");
                     section.addPage(page => {
                         page.setType("mantle:blank");
-                        page.setContent(new ContentBlank());
+                        page.setContent(BookPage.ofType("mantle:blank"));
                     });
                 }
             })
@@ -91,10 +92,44 @@ The function accepts a `BookData` as argument.
 Then we iterate through all the sections of the book.
 For each section, we added 5 blank pages.
 
-We use method `BookPage.getClass()` to load the class of the Page Type `mantle:blank`.
-This Page Type represents a blank page.
+We use method `BookPage.ofType()` to create a page of which the type is `mantle:blank`.
 
-Then we use `new ContentBlank()` to create a new instance.
+###### Advanced example
+
+Almost every Page Type except `mantle:blank` has its own data.
+We need to set them before adding them into a book.
+
+Use a consumer as the operation for the Page Content.
+
+```javascript
+// Script type: STARTUP
+const TextData = Java.loadClass("slimeknights.mantle.client.book.data.element.TextData")
+
+MantleJSEvents.transformerRegistry(event => {
+    event.create('add_blank_pages')
+        .transform(bookData => {
+            bookData.sections.forEach(section => {
+                section.addPage(page => {
+                    page.setType("mantle:text");
+                    page.setContent(BookPage.ofType("mantle:text"), content => {
+                        content.text = [new TextData("Text test")]
+                    });
+                });
+            })
+        });
+})
+```
+
+The example adds a page that writes `Text test` after each section.
+The consumer `content => {}` is for Page Content's initializion.
+
+> 💡 **Note**
+>
+> `TextData` is used to represent texts shown in Mantle's books.
+>
+> Property `content.text` is an Array, you can not simply set it to a `TextData` object.
+>
+> For property lists of other Page Types, see [Mantle's Github Repository](https://github.com/SlimeKnights/Mantle/tree/1.20/src/main/java/slimeknights/mantle/client/book/data/content).
 
 ##### Add transformers via Java classes
 
