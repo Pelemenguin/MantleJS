@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import pelemenguin.mantlejs.event.book.BookRegistryHandler;
@@ -24,6 +26,11 @@ public class MantleJS {
 
     public static ResourceLocation createLocation(String id) {
         return new ResourceLocation(MantleJS.MODID, id);
+    }
+
+    @SubscribeEvent
+    public static void registerListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener(new BookRegistryHandler());
     }
 
 }

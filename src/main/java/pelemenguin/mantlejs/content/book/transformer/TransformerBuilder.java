@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer.BookDataHelper;
+import pelemenguin.mantlejs.content.book.transformer.data.BookDataHelper;
 
 public class TransformerBuilder {
 
