@@ -18,24 +18,24 @@ import slimeknights.mantle.client.book.repository.BookRepository;
 import slimeknights.mantle.client.screen.book.BookScreen;
 
 @ParametersAreNonnullByDefault
-public class SectionDataHelper {
+public class SectionDataJS {
 
     public SectionData origin;
-    private BookDataHelper parent;
+    private BookDataJS parent;
 
-    public SectionDataHelper(SectionData origin) {
+    public SectionDataJS(SectionData origin) {
         this(origin, null);
     }
-    public SectionDataHelper(SectionData origin, @Nullable BookDataHelper parent) {
+    public SectionDataJS(SectionData origin, @Nullable BookDataJS parent) {
         this.origin = origin;
         this.parent = parent;
     }
 
     @Nullable
     @Info("Get the parent book of the section.")
-    public BookDataHelper getParent() {
+    public BookDataJS getParent() {
         if (this.parent == null) {
-            this.parent = this.origin.parent == null ? null : new BookDataHelper(this.origin.parent);
+            this.parent = this.origin.parent == null ? null : new BookDataJS(this.origin.parent);
         }
         return this.parent;
     }
@@ -49,6 +49,8 @@ public class SectionDataHelper {
     public ArrayList<PageData> getPages() {
         return this.origin.pages;
     }
+
+    // Mantle's built-in methods
 
     public String translate(String string) {
         return this.origin.translate(string);
@@ -81,6 +83,8 @@ public class SectionDataHelper {
     public boolean isConditionMet() {
         return this.origin.isConditionMet();
     }
+
+    // Getters
 
     @Nullable
     public String getName() {

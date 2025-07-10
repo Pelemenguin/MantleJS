@@ -23,20 +23,20 @@ import slimeknights.mantle.client.book.transformer.BookTransformer;
 import slimeknights.mantle.client.screen.book.BookScreen;
 
 @ParametersAreNonnullByDefault
-public class BookDataHelper {
+public class BookDataJS {
 
     @Info("Access original `BookData` object instead of this helper.\n\nNot suggested unless you do want further customization.")
     public BookData origin;
 
-    public BookDataHelper(BookData origin) {
+    public BookDataJS(BookData origin) {
         this.origin = origin;
     }
 
     @Info("Get the sections of the book.")
-    public ArrayList<SectionDataHelper> getSections() {
-        ArrayList<SectionDataHelper> result = new ArrayList<>();
+    public ArrayList<SectionDataJS> getSections() {
+        ArrayList<SectionDataJS> result = new ArrayList<>();
         for (SectionData s : this.origin.sections) {
-            result.add(new SectionDataHelper(s, this));
+            result.add(new SectionDataJS(s, this));
         }
         return result;
     }
@@ -66,15 +66,15 @@ public class BookDataHelper {
 
     @Info("Finds the section with the given name, ignoring advancements")
     @Nullable
-    public SectionDataHelper findSection(String name) {
+    public SectionDataJS findSection(String name) {
         return this.findSection(name, null);
     }
 
     @Info("Finds the section with the given name, advancement sensitive")
     @Nullable
-    public SectionDataHelper findSection(String name, @Nullable BookScreen.AdvancementCache advancementCache) {
+    public SectionDataJS findSection(String name, @Nullable BookScreen.AdvancementCache advancementCache) {
         SectionData found = this.origin.findSection(name, advancementCache);
-        return found == null ? null : new SectionDataHelper(found, this);
+        return found == null ? null : new SectionDataJS(found, this);
     }
 
     @Info("Gets the number corresponding to the first page")

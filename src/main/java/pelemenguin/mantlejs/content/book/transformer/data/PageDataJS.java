@@ -9,25 +9,25 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import slimeknights.mantle.client.book.data.PageData;
 
 @ParametersAreNonnullByDefault
-public class PageDataHelper {
+public class PageDataJS {
 
     public PageData origin;
-    private SectionDataHelper parent;
+    private SectionDataJS parent;
 
-    public PageDataHelper(PageData origin, @Nullable SectionDataHelper parent) {
+    public PageDataJS(PageData origin, @Nullable SectionDataJS parent) {
         this.origin = origin;
         this.parent = parent;
     }
 
-    public PageDataHelper(PageData origin) {
+    public PageDataJS(PageData origin) {
         this(origin, null);
     }
 
     @Nullable
     @Info("Get the parent section of the page.")
-    public SectionDataHelper getParent() {
+    public SectionDataJS getParent() {
         if (this.parent == null) {
-            this.parent = this.origin.parent == null ? null : new SectionDataHelper(this.origin.parent);
+            this.parent = this.origin.parent == null ? null : new SectionDataJS(this.origin.parent);
         }
         return this.parent;
     }

@@ -7,14 +7,14 @@ import java.util.function.Consumer;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.resources.ResourceLocation;
-import pelemenguin.mantlejs.content.book.transformer.data.BookDataHelper;
+import pelemenguin.mantlejs.content.book.transformer.data.BookDataJS;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.transformer.BookTransformer;
 
 @ParametersAreNonnullByDefault
 public class MantleJSTransformer extends BookTransformer {
 
-    protected static final Map<ResourceLocation, Consumer<BookDataHelper>> TRANSFORM_FUNCTIONS = new HashMap<>();
+    protected static final Map<ResourceLocation, Consumer<BookDataJS>> TRANSFORM_FUNCTIONS = new HashMap<>();
 
     public ResourceLocation id;
 
@@ -24,7 +24,7 @@ public class MantleJSTransformer extends BookTransformer {
 
     @Override
     public void transform(BookData data) {
-        BookDataHelper helper = new BookDataHelper(data);
+        BookDataJS helper = new BookDataJS(data);
         TRANSFORM_FUNCTIONS.get(this.id).accept(helper);
     }
 
