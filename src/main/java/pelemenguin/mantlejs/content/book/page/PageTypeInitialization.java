@@ -13,7 +13,7 @@ public class PageTypeInitialization {
             MantleJS.LOGGER.debug("Page Type registered: "+l.toString());
         }
         
-        BookLoader.registerPageType(new ResourceLocation(KubeJS.MOD_ID, "custom"), MantleJSPageType.class);
+        BookLoader.registerPageType(ResourceLocation.fromNamespaceAndPath(KubeJS.MOD_ID, "custom"), MantleJSPageType.class);
     }
 
 }

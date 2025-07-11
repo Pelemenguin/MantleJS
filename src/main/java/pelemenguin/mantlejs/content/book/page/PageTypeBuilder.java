@@ -3,6 +3,8 @@ package pelemenguin.mantlejs.content.book.page;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.JsonObject;
+
 import dev.latvian.mods.kubejs.KubeJS;
 import net.minecraft.resources.ResourceLocation;
 import pelemenguin.mantlejs.content.book.data.BookDataJS;
@@ -27,7 +29,7 @@ public class PageTypeBuilder {
 
     @FunctionalInterface
     public interface BuildFunction {
-        public void build(BookDataJS data, ArrayList<BookElement> elements, boolean isRightSide);
+        public void build(JsonObject arguments, BookDataJS data, ArrayList<BookElement> elements, boolean isRightSide);
     }
 
 }
