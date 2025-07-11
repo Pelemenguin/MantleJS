@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import pelemenguin.mantlejs.MantleJS;
 import pelemenguin.mantlejs.content.book.BookInitialization;
+import pelemenguin.mantlejs.content.book.page.PageTypeInitialization;
 import pelemenguin.mantlejs.content.book.transformer.TransformerInitialization;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 
@@ -15,11 +16,14 @@ import pelemenguin.mantlejs.event.MantleJSEventGroup;
 public class BookRegistryHandler implements ResourceManagerReloadListener {
     public static void init() {
 
+        PageTypeRegistryEventJS pageTypeRegistrer = new PageTypeRegistryEventJS();
+        MantleJSEventGroup.PAGE_TYPE_REGISTRY.post(pageTypeRegistrer);
+        PageTypeInitialization.initPageTypes();
         TransformerRegistryEventJS transformerRegister = new TransformerRegistryEventJS();
-        BookRegisterEventJS bookRegister = new BookRegisterEventJS();
         MantleJSEventGroup.TRANSFORMER_REGISTRY.post(transformerRegister);
-        MantleJSEventGroup.BOOK_REGISTRY.post(bookRegister);
         TransformerInitialization.initTransformer();
+        BookRegisterEventJS bookRegister = new BookRegisterEventJS();
+        MantleJSEventGroup.BOOK_REGISTRY.post(bookRegister);
         BookInitialization.initBook();
 
     }

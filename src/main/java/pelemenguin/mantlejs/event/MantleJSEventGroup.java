@@ -3,6 +3,7 @@ package pelemenguin.mantlejs.event;
 import dev.latvian.mods.kubejs.event.EventGroup;
 import dev.latvian.mods.kubejs.event.EventHandler;
 import pelemenguin.mantlejs.event.book.BookRegisterEventJS;
+import pelemenguin.mantlejs.event.book.PageTypeRegistryEventJS;
 import pelemenguin.mantlejs.event.book.TransformerRegistryEventJS;
 
 public interface MantleJSEventGroup {
@@ -11,5 +12,6 @@ public interface MantleJSEventGroup {
 
     EventHandler BOOK_REGISTRY = GROUP.startup("bookRegistry", () -> BookRegisterEventJS.class);
     EventHandler TRANSFORMER_REGISTRY = GROUP.startup("transformerRegistry", () -> TransformerRegistryEventJS.class);
+    EventHandler PAGE_TYPE_REGISTRY = GROUP.startup("pageTypeRegistry", () -> PageTypeRegistryEventJS.class);
 
 }

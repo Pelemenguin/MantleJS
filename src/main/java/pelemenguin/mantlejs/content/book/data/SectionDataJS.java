@@ -26,9 +26,10 @@ public class SectionDataJS {
     private BookDataJS parent;
 
     public SectionDataJS(SectionData origin) {
-        this(origin, null);
+        this.origin = origin;
+        this.parent = new BookDataJS(this.origin.parent);
     }
-    public SectionDataJS(SectionData origin, @Nullable BookDataJS parent) {
+    protected SectionDataJS(SectionData origin, BookDataJS parent) {
         this.origin = origin;
         this.parent = parent;
     }
@@ -37,7 +38,7 @@ public class SectionDataJS {
 
     public void addPage(Consumer<PageDataJS> builder) {
         PageDataJS raw = new PageDataJS(new PageData(false), this);
-        raw.setContent(new ContentBlank());
+        raw.setType(ContentBlank.ID);
         builder.accept(raw);
         this.origin.pages.add(raw.origin);
     }
@@ -45,8 +46,14 @@ public class SectionDataJS {
     @Nullable
     @Info("Get the parent book of the section.")
     public BookDataJS getParent() {
+        if (this.origin.parent == null) {
+            return null;
+        }
         if (this.parent == null) {
-            this.parent = this.origin.parent == null ? null : new BookDataJS(this.origin.parent);
+            this.parent = new BookDataJS(this.origin.parent);
+        }
+        else if (!this.parent.origin.equals(this.origin.parent)) {
+            this.parent.origin = this.origin.parent;
         }
         return this.parent;
     }
