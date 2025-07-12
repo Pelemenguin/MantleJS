@@ -9,6 +9,7 @@ import pelemenguin.mantlejs.content.book.transformer.BuiltinTransformer;
 import pelemenguin.mantlejs.content.book.util.BookScreenInterface;
 import pelemenguin.mantlejs.content.book.util.TextDataInterface;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
+import pelemenguin.mantlejs.event.book.BookRegistryHandler;
 import pelemenguin.mantlejs.item.book.BookItemBuilder;
 
 public class MantleJSPlugin extends KubeJSPlugin {
@@ -30,6 +31,11 @@ public class MantleJSPlugin extends KubeJSPlugin {
         event.add("BookTextData", TextDataInterface.class);
         event.add("BookScreen", BookScreenInterface.class);
         event.add("BookElement", BookElementInterface.class);
-   }
+    }
+
+    @Override
+    public void onServerReload() {
+        BookRegistryHandler.init();
+    }
 
 }

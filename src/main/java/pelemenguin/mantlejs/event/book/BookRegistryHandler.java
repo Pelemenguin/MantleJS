@@ -2,18 +2,17 @@ package pelemenguin.mantlejs.event.book;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import pelemenguin.mantlejs.MantleJS;
 import pelemenguin.mantlejs.content.book.BookInitialization;
 import pelemenguin.mantlejs.content.book.page.PageTypeInitialization;
 import pelemenguin.mantlejs.content.book.transformer.TransformerInitialization;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 
 @ParametersAreNonnullByDefault
-public class BookRegistryHandler implements ResourceManagerReloadListener {
+@EventBusSubscriber
+public class BookRegistryHandler {
     public static void init() {
 
         PageTypeRegistryEventJS pageTypeRegistrer = new PageTypeRegistryEventJS();
@@ -33,9 +32,4 @@ public class BookRegistryHandler implements ResourceManagerReloadListener {
         init();
     }
 
-    @Override
-    public void onResourceManagerReload(ResourceManager p_10758_) {
-        MantleJS.LOGGER.info("MantleJS reloading...");
-        init();
-    }
 }
