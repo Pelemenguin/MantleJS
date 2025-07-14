@@ -64,8 +64,12 @@ public class SectionDataJS {
     }
 
     @Info("Get a list of pages of the section")
-    public ArrayList<PageData> getPages() {
-        return this.origin.pages;
+    public ArrayList<PageDataJS> getPages() {
+        ArrayList<PageDataJS> result = new ArrayList<>();
+        for (PageData p : this.origin.pages) {
+            result.add(new PageDataJS(p, this));
+        }
+        return result;
     }
 
     // Mantle's built-in methods
