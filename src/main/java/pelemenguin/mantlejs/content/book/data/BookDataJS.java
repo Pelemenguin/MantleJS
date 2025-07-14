@@ -78,14 +78,15 @@ public class BookDataJS {
     }
 
     @Info("Gets the number corresponding to the first page")
-    public int getFirstPageNumber(SectionData section, @Nullable BookScreen.AdvancementCache advancementCache) {
-        return this.origin.getFirstPageNumber(section, advancementCache);
+    public int getFirstPageNumber(SectionDataJS section, @Nullable BookScreen.AdvancementCache advancementCache) {
+        return this.origin.getFirstPageNumber(section.origin, advancementCache);
     }
 
     @Info("Gets the page data for the given page number")
     @Nullable
-    public PageData findPage(int number, @Nullable BookScreen.AdvancementCache advancementCache) {
-        return this.origin.findPage(number, advancementCache);
+    public PageDataJS findPage(int number, @Nullable BookScreen.AdvancementCache advancementCache) {
+        var result = this.origin.findPage(number, advancementCache);
+        return result == null ? null : new PageDataJS(result);
     }
     @Info("Gets the page data for the given location")
     @Nullable
@@ -104,8 +105,12 @@ public class BookDataJS {
     }
 
     @Info("Gets a list of all visible sections, sensitive to current advancements")
-    public List<SectionData> getVisibleSections(@Nullable BookScreen.AdvancementCache advancementCache) {
-        return this.origin.getVisibleSections(advancementCache);
+    public List<SectionDataJS> getVisibleSections(@Nullable BookScreen.AdvancementCache advancementCache) {
+        ArrayList<SectionDataJS> result = new ArrayList<>();
+        for (SectionData data : this.origin.getVisibleSections(advancementCache)) {
+            result.add(new SectionDataJS(data, this));
+        }
+        return result;
     }
 
     @Info("Translates the given string using the book language")

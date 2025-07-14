@@ -21,7 +21,7 @@ public class BookRegistryHandler {
         TransformerRegistryEventJS transformerRegister = new TransformerRegistryEventJS();
         MantleJSEventGroup.TRANSFORMER_REGISTRY.post(transformerRegister);
         TransformerInitialization.initTransformer();
-        BookRegisterEventJS bookRegister = new BookRegisterEventJS();
+        BookRegistryEventJS bookRegister = new BookRegistryEventJS();
         MantleJSEventGroup.BOOK_REGISTRY.post(bookRegister);
         BookInitialization.initBook();
 
