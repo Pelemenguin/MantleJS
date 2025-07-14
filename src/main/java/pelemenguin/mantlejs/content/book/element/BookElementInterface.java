@@ -52,7 +52,7 @@ public interface BookElementInterface {
     public static ImageElement image(int x, int y, int width, int height, ImageData image, int colorMultiplier) {
         return new ImageElement(x, y, width, height, image, colorMultiplier);
     }
-    
+
     public static ItemElement item(int x, int y, float scale, ItemStack... itemCycle) {
         return new ItemElement(x, y, scale, itemCycle);
     }
@@ -91,7 +91,5 @@ public interface BookElementInterface {
     public static TooltipElement tooltip(List<Component> tooltip, int x, int y, int width, int height) {
         return new TooltipElement(tooltip, x, y, width, height);
     }
-
-    // TODO: More Mantle Elements
 
 }
