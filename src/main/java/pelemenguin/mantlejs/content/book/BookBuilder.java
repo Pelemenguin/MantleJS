@@ -43,7 +43,7 @@ public class BookBuilder {
      */
     @Info("Add a book transformer created in `MantleJSEvents.transformerRegistry`")
     public BookBuilder addTransformer(String transformerId) {
-        this.bookTransformers.add(new MantleJSTransformer(ResourceLocation.parse(KubeJS.appendModId(transformerId))));
+        this.bookTransformers.add(new MantleJSTransformer(new ResourceLocation(KubeJS.appendModId(transformerId))));
         return this;
     }
 

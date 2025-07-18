@@ -17,7 +17,7 @@ import slimeknights.mantle.client.screen.book.element.BookElement;
 @ParametersAreNonnullByDefault
 public class MantleJSPageType extends PageContent {
     
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(KubeJS.MOD_ID, "custom");
+    public static final ResourceLocation ID = KubeJS.id("custom");
     public static final HashMap<ResourceLocation, BuildFunction> BUILD_FUNCTIONS = new HashMap<>();
     
     public String type;
@@ -32,7 +32,7 @@ public class MantleJSPageType extends PageContent {
     @Override
     public void build(BookData data, ArrayList<BookElement> elements, boolean isRightSide) {
         try {
-            BuildFunction func = BUILD_FUNCTIONS.get(ResourceLocation.parse(KubeJS.appendModId(this.type)));
+            BuildFunction func = BUILD_FUNCTIONS.get(new ResourceLocation(KubeJS.appendModId(this.type)));
             // MantleJS.LOGGER.debug("Build page with function: "+func);
             if (func == null) {
                 ConsoleJS.STARTUP.error("No such type: "+type);

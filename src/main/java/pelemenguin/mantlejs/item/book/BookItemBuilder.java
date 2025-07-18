@@ -17,14 +17,14 @@ public class BookItemBuilder extends ItemBuilder {
     @Override
     public Item createObject() {
         if (bookDataLocation == null) {
-            this.bookDataLocation = ResourceLocation.fromNamespaceAndPath(KubeJS.MOD_ID, "unknown");
+            this.bookDataLocation = KubeJS.id("unknown");
         }
         return new MantleJSBookItem(createItemProperties(), this.bookDataLocation);
     }
 
     @Info("Set the book data of the book. This method is **necessary**.\n\nAccepts an id. This id should be the same as the one you have created in `MantleJSEvents.bookRegistry` event.")
     public BookItemBuilder setBookData(String id) {
-        this.bookDataLocation = ResourceLocation.parse(KubeJS.appendModId(id));
+        this.bookDataLocation = new ResourceLocation(KubeJS.appendModId(id));
         return this;
     }
     

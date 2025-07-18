@@ -30,7 +30,7 @@ public interface BookPageInterface {
     }
     @Info("Create an instance of Page Content.\n\nSecond parameter accepts a consumer. You can initialize or add properties you want here.")
     public static PageContent ofType(String pageType, Consumer<PageContent> operation) {
-        ResourceLocation type = ResourceLocation.parse(KubeJS.appendModId(pageType));
+        ResourceLocation type = new ResourceLocation(KubeJS.appendModId(pageType));
         try {
             var clazz = BookLoader.getPageType(type);
             if (clazz == null) {

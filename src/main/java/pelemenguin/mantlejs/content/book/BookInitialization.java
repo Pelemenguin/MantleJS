@@ -13,7 +13,7 @@ public class BookInitialization extends BookData {
         for (String r : BookBuilder.BOOK_BUILDERS.keySet()) {
 
             // Book Data and Transformers
-            ResourceLocation loc = ResourceLocation.parse(r);
+            ResourceLocation loc = new ResourceLocation(r);
             BookBuilder bookDataJS = BookBuilder.BOOK_BUILDERS.get(r);
             BookData bookData = BookLoader.registerBook(loc, bookDataJS.appendIndex, bookDataJS.appendContentTable, bookDataJS.bookRepositories.toArray(new BookRepository[0]));
             for (BookTransformer t : bookDataJS.bookTransformers) {

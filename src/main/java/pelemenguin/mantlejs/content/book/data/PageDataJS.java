@@ -51,7 +51,7 @@ public class PageDataJS {
         this.setCustomType(type, new Object());
     }
     public void setCustomType(String type, Object arguments) {
-        ResourceLocation rtype = ResourceLocation.parse(KubeJS.appendModId(type));
+        ResourceLocation rtype = new ResourceLocation(KubeJS.appendModId(type));
         if (!MantleJSPageType.BUILD_FUNCTIONS.containsKey(rtype)) {
             this.origin.type = Mantle.getResource("error");
             this.origin.content = new ContentError("No such custom page type: "+type);

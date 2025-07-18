@@ -17,7 +17,7 @@ public class PageTypeBuilder {
 
     public PageTypeBuilder(String id) {
         this.id = KubeJS.appendModId(id);
-        PAGE_TYPE_BUILDERS.put(ResourceLocation.parse(this.id), this);
+        PAGE_TYPE_BUILDERS.put(new ResourceLocation(this.id), this);
     }
 
     public PageTypeBuilder buildPage(BuildFunction function) {
