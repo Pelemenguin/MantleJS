@@ -8,7 +8,6 @@ import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
 import dev.latvian.mods.rhino.NativeJavaClass;
 import net.minecraft.resources.ResourceLocation;
-import pelemenguin.mantlejs.MantleJS;
 import pelemenguin.mantlejs.content.book.page.MantleJSPageType;
 import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.data.content.ContentError;
@@ -16,7 +15,7 @@ import slimeknights.mantle.client.book.data.content.PageContent;
 
 public interface BookPageInterface {
 
-    @Info("Get Java classes of a specified id.")
+    @Info("Get a Java class of a specified id.")
     public static NativeJavaClass getClass(ResourceLocation type) {
         var clazz = BookLoader.getPageType(type);
         if (clazz == null) {
@@ -35,7 +34,7 @@ public interface BookPageInterface {
         try {
             var clazz = BookLoader.getPageType(type);
             if (clazz == null) {
-                MantleJS.LOGGER.error("No such Page Type: "+type.toString());
+                // MantleJS.LOGGER.error("No such Page Type: "+type.toString());
                 ConsoleJS.STARTUP.error("No such Page Type: "+type.toString());
                 return createError("No such Page Type: "+type.toString());
             }
@@ -46,7 +45,7 @@ public interface BookPageInterface {
             operation.accept(instance);
             return instance;
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassCastException e) {
-            MantleJS.LOGGER.error("Fail to create Page Content", e);
+            // MantleJS.LOGGER.error("Fail to create Page Content", e);
             ConsoleJS.STARTUP.error("Fail to create Page Content", e);
             return createError(e.toString());
         }

@@ -18,6 +18,12 @@ If you want to play this mod in advance, you can build from source.
 
 ## Tutorials
 
+See `docs` branch.
+
+<!--
+
+## Tutorials
+
 ### Mantle book
 
 #### Basics
@@ -258,3 +264,5 @@ Under folder `test`, place `test_type.json`, write:
 >
 > The key `arguments` is just what we mentioned in `build()`.
 > Anything you place inside can be accessed in `build()` function.
+
+-->

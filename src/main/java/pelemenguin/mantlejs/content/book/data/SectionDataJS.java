@@ -119,7 +119,7 @@ public class SectionDataJS {
     public ImageData getIcon() {
         return this.origin.icon;
     }
-    // TODO: Image Data customization
+    
     public void setIcon(ImageData icon) {
         this.origin.icon = icon;
     } 

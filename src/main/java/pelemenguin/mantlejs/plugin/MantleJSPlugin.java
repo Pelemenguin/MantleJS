@@ -11,6 +11,7 @@ import pelemenguin.mantlejs.content.book.util.TextDataInterface;
 import pelemenguin.mantlejs.event.MantleJSEventGroup;
 import pelemenguin.mantlejs.event.book.BookRegistryHandler;
 import pelemenguin.mantlejs.item.book.BookItemBuilder;
+import slimeknights.mantle.client.book.data.element.ImageData;
 
 public class MantleJSPlugin extends KubeJSPlugin {
 
@@ -31,6 +32,7 @@ public class MantleJSPlugin extends KubeJSPlugin {
         event.add("BookTextData", TextDataInterface.class);
         event.add("BookScreen", BookScreenInterface.class);
         event.add("BookElement", BookElementInterface.class);
+        event.add("ImageData", ImageData.class);
     }
 
     @Override
