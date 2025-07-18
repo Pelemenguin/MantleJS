@@ -96,3 +96,25 @@ That's why we can use `args.text` [above](#custom-page-types).
 > The key `type` should be the id you registered in `MantleJSEvents.pageTypeRegistry`.
 >
 > You can access anything under the key `arguments` in `build()` function via the first parameter.
+
+## Use custom page types in transformers
+
+Use `setCustomType` on the page to set its content to a custom type.
+
+```javascript
+// Script type: STARTUP
+MantleJSEvents.transformerRegistry(event => {
+    event.create('add_blank_pages')
+        .transform(bookData => {
+            bookData.sections.forEach(section => {
+                section.addPage(page => {
+                    page.setCustomType("test_type", {
+                        "text": "Write anthing here"
+                    })
+                })
+            })
+        });
+})
+```
+
+The second parameter of the `setCustomType` method is equivalent to the `arguments` key in JSON files.
