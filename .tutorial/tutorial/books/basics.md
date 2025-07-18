@@ -8,7 +8,7 @@ You can use `BookRegistryEventJS` to create your own book.
 // Script type: STARTUP
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book");
-})
+});
 ```
 
 The `create` method accepts an id for the book.
@@ -20,7 +20,7 @@ In order to add contents to the book, you should specify a book repository.
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book")
         .addRepository("kubejs:book/example_book");
-})
+});
 ```
 
 The `addRepository` method accepts a Resource Location for the resources.

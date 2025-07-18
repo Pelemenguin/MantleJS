@@ -26,9 +26,9 @@ MantleJSEvents.transformerRegistry(event => {
                         page.setType("mantle:blank");
                     });
                 }
-            })
+            });
         });
-})
+});
 ```
 
 Let me explain this.

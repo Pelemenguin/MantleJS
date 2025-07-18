@@ -10,7 +10,7 @@ Use `'tconstruct:book'` to access this builder.
 StartupEvents.registry('item', event => {
     event.create('test_book', 'tconstruct:book')
         .setBookData('example_book');
-})
+});
 ```
 
 `setBookData` set the data of the book.
