@@ -17,7 +17,7 @@ public class MantleJSPlugin extends KubeJSPlugin {
 
     @Override
     public void init() {
-        RegistryInfo.ITEM.addType("tconstruct:book", BookItemBuilder.class, BookItemBuilder::new);
+        RegistryInfo.ITEM.addType("mantle:book", BookItemBuilder.class, BookItemBuilder::new);
     }
     
     @Override

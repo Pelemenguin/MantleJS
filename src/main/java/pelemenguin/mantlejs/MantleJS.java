@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -22,8 +21,8 @@ public class MantleJS {
         eventBus.register(BookRegistryHandler.class);
     }
 
-    public static ResourceLocation createLocation(String id) {
-        return new ResourceLocation(MantleJS.MODID, id);
-    }
+    // public static ResourceLocation createLocation(String id) {
+    //     return new ResourceLocation(MantleJS.MODID, id);
+    // }
 
 }

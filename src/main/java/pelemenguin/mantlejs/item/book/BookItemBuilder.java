@@ -5,7 +5,6 @@ import dev.latvian.mods.kubejs.item.ItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import pelemenguin.mantlejs.MantleJS;
 
 public class BookItemBuilder extends ItemBuilder {
 
@@ -18,7 +17,7 @@ public class BookItemBuilder extends ItemBuilder {
     @Override
     public Item createObject() {
         if (bookDataLocation == null) {
-            this.bookDataLocation = MantleJS.createLocation("undefined");
+            this.bookDataLocation = ResourceLocation.fromNamespaceAndPath(KubeJS.MOD_ID, "unknown");
         }
         return new MantleJSBookItem(createItemProperties(), this.bookDataLocation);
     }
