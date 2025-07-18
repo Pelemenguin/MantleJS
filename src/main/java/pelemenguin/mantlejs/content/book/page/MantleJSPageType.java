@@ -5,11 +5,8 @@ import java.util.HashMap;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.gson.JsonObject;
-
 import dev.latvian.mods.kubejs.KubeJS;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
-import dev.latvian.mods.kubejs.util.JsonIO;
 import net.minecraft.resources.ResourceLocation;
 import pelemenguin.mantlejs.content.book.data.BookDataJS;
 import pelemenguin.mantlejs.content.book.page.PageTypeBuilder.BuildFunction;
@@ -24,7 +21,7 @@ public class MantleJSPageType extends PageContent {
     public static final HashMap<ResourceLocation, BuildFunction> BUILD_FUNCTIONS = new HashMap<>();
     
     public String type;
-    public JsonObject arguments;
+    public Object arguments;
 
     public MantleJSPageType() {
     }
@@ -42,7 +39,7 @@ public class MantleJSPageType extends PageContent {
                 return;
             }
             // MantleJS.LOGGER.debug("Function hash code: "+func.hashCode());
-            func.build(JsonIO.toObject(this.arguments), new BookDataJS(data), elements, isRightSide);
+            func.build(arguments, new BookDataJS(data), elements, isRightSide);
         } catch (Exception e) {
             ConsoleJS.STARTUP.error("Fail to build page: "+this.type.toString(), e);
         }
