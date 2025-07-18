@@ -48,6 +48,9 @@ public class PageDataJS {
     }
 
     public void setCustomType(String type) {
+        this.setCustomType(type, new Object());
+    }
+    public void setCustomType(String type, Object arguments) {
         ResourceLocation rtype = ResourceLocation.parse(KubeJS.appendModId(type));
         if (!MantleJSPageType.BUILD_FUNCTIONS.containsKey(rtype)) {
             this.origin.type = Mantle.getResource("error");
@@ -55,7 +58,9 @@ public class PageDataJS {
             return;
         }
         this.origin.type = MantleJSPageType.ID;
-        this.origin.content = new MantleJSPageType(type);
+        MantleJSPageType content = new MantleJSPageType(type);
+        content.arguments = arguments;
+        this.origin.content = content;
     }
 
     @Nullable
