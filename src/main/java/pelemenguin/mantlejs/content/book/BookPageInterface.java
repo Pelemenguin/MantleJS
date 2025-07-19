@@ -13,6 +13,7 @@ import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.data.content.ContentError;
 import slimeknights.mantle.client.book.data.content.PageContent;
 
+@SuppressWarnings("removal") // No ResourceLocation's constructor removal in 1.20.1
 public interface BookPageInterface {
 
     @Info("Get a Java class of a specified id.")

@@ -20,16 +20,16 @@ import slimeknights.mantle.client.screen.book.element.ArrowElement;
 import slimeknights.mantle.client.screen.book.element.ImageElement;
 import slimeknights.mantle.client.screen.book.element.ItemElement;
 import slimeknights.mantle.client.screen.book.element.ListingLeftElement;
+import slimeknights.mantle.client.screen.book.element.PageIconLinkElement;
 import slimeknights.mantle.client.screen.book.element.SelectionElement;
 import slimeknights.mantle.client.screen.book.element.SizedBookElement;
 import slimeknights.mantle.client.screen.book.element.StructureElement;
 import slimeknights.mantle.client.screen.book.element.TextComponentElement;
 import slimeknights.mantle.client.screen.book.element.TextElement;
 import slimeknights.mantle.client.screen.book.element.TooltipElement;
-import slimeknights.tconstruct.library.client.book.elements.PageIconLinkElement;
 
 @ParametersAreNonnullByDefault
-public interface BookElementInterface {
+public class BookElementInterface {
 
     // TODO: ArrowType access
     public static AnimationToggleElement animationToggle(int x, int y, ArrowButton.ArrowType arrowType, int arrowColor, int arrowColorHover, int arrowColorActive, StructureElement structureElement) {
