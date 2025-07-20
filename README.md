@@ -2,9 +2,7 @@
 
 **The mod's source code is protected under MIT License.**
 
-Adding the mod to your modpack is currently **not** allowed,
-for this mod is still working in progress.
-As soon as the first release is published, whoever can use it in their modpack.
+Anyone can use this in their modpack.
 
 ## What is this mod for?
 
