@@ -3,12 +3,12 @@
 # Book Items
 
 MantleJS added a new kind of item builder.
-Use `'tconstruct:book'` to access this builder.
+Use `'mantle:book'` to access this builder.
 
 ```javascript
 // Script type: STARTUP
 StartupEvents.registry('item', event => {
-    event.create('test_book', 'tconstruct:book')
+    event.create('test_book', 'mantle:book')
         .setBookData('example_book');
 });
 ```

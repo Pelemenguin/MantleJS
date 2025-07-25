@@ -19,7 +19,7 @@ In order to add contents to the book, you should specify a book repository.
 // Script type: STARTUP
 MantleJSEvents.bookRegistry(event => {
     event.create("example_book")
-        .addRepository("kubejs:book/example_book");
+        .addBookRepository("kubejs:book/example_book");
 });
 ```
 
