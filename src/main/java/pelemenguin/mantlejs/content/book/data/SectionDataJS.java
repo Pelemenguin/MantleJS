@@ -63,6 +63,10 @@ public class SectionDataJS {
         return this.origin.source;
     }
 
+    public void setSource(BookRepository source) {
+        this.origin.source = source;
+    }
+
     @Info("Get a list of pages of the section")
     public ArrayList<PageDataJS> getPages() {
         ArrayList<PageDataJS> result = new ArrayList<>();

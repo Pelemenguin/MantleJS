@@ -50,6 +50,7 @@ public class PageDataJS {
     public void setCustomType(String type) {
         this.setCustomType(type, new Object());
     }
+    @SuppressWarnings("removal")
     public void setCustomType(String type, Object arguments) {
         ResourceLocation rtype = new ResourceLocation(KubeJS.appendModId(type));
         if (!MantleJSPageType.BUILD_FUNCTIONS.containsKey(rtype)) {
@@ -81,6 +82,10 @@ public class PageDataJS {
     @Info("Get the source repository of the page.")
     public BookRepository getSource() {
         return this.origin.source;
+    }
+
+    public void setSource(BookRepository source) {
+        this.origin.source = source;
     }
 
     @Info("Get the content of the page.")
