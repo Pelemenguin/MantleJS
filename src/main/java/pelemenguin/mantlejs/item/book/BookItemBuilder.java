@@ -22,6 +22,7 @@ public class BookItemBuilder extends ItemBuilder {
         return new MantleJSBookItem(createItemProperties(), this.bookDataLocation);
     }
 
+    @SuppressWarnings("removal")
     @Info("Set the book data of the book. This method is **necessary**.\n\nAccepts an id. This id should be the same as the one you have created in `MantleJSEvents.bookRegistry` event.")
     public BookItemBuilder setBookData(String id) {
         this.bookDataLocation = new ResourceLocation(KubeJS.appendModId(id));
