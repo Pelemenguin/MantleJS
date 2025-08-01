@@ -37,9 +37,12 @@ public class SectionDataJS {
     // MantleJS Custom
 
     public void addPage(Consumer<PageDataJS> builder) {
-        PageDataJS raw = new PageDataJS(new PageData(false), this);
+        PageDataJS raw = new PageDataJS(new PageData(true), this);
         raw.setType(ContentBlank.ID);
         builder.accept(raw);
+        raw.origin.parent = this.origin;
+        raw.origin.source = this.origin.source;
+        raw.origin.load();
         this.origin.pages.add(raw.origin);
     }
 
