@@ -41,6 +41,7 @@ public class BookBuilder {
     /**
      * Add a book transformer
      */
+    @SuppressWarnings("removal")
     @Info("Add a book transformer created in `MantleJSEvents.transformerRegistry`")
     public BookBuilder addTransformer(String transformerId) {
         this.bookTransformers.add(new MantleJSTransformer(new ResourceLocation(KubeJS.appendModId(transformerId))));

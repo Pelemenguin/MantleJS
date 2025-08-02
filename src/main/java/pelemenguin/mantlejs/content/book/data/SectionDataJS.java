@@ -36,14 +36,39 @@ public class SectionDataJS {
 
     // MantleJS Custom
 
-    public void addPage(Consumer<PageDataJS> builder) {
+    public void addPage(@Nullable Integer index, Consumer<PageDataJS> builder) {
         PageDataJS raw = new PageDataJS(new PageData(true), this);
         raw.setType(ContentBlank.ID);
         builder.accept(raw);
         raw.origin.parent = this.origin;
         raw.origin.source = this.origin.source;
         raw.origin.load();
-        this.origin.pages.add(raw.origin);
+        if (index == null) {
+            this.origin.pages.add(raw.origin);
+        } else {
+            this.origin.pages.add(index, raw.origin);
+        }
+    }
+
+    public void addPage(Consumer<PageDataJS> builder) {
+        this.addPage(null, builder);
+    }
+
+    public void addRawPage(@Nullable Integer index, PageDataJS page) {
+        if (index == null) {
+            this.origin.pages.add(page.origin);
+        } else {
+            this.origin.pages.add(index, page.origin);
+        }
+    }
+
+    public void addRawPage(PageDataJS page) {
+        this.addRawPage(null, page);
+    }
+
+    @Info("Remove a page by index. Throws `IndexOutOfBoundsException` if index is too large.")
+    public void removePage(int index) throws IndexOutOfBoundsException {
+        this.origin.pages.remove(index);
     }
 
     @Nullable
@@ -59,6 +84,11 @@ public class SectionDataJS {
             this.parent.origin = this.origin.parent;
         }
         return this.parent;
+    }
+
+    public void setParent(BookDataJS parent) {
+        this.origin.parent = parent.origin;
+        this.parent = parent;
     }
 
     @Info("Get the repository source of the sections.")

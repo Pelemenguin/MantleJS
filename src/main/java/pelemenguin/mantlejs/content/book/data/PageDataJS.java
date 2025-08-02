@@ -13,6 +13,8 @@ import pelemenguin.mantlejs.content.book.BookPageInterface;
 import pelemenguin.mantlejs.content.book.page.MantleJSPageType;
 import slimeknights.mantle.Mantle;
 import slimeknights.mantle.client.book.data.PageData;
+import slimeknights.mantle.client.book.data.SectionData;
+import slimeknights.mantle.client.book.data.content.ContentBlank;
 import slimeknights.mantle.client.book.data.content.ContentError;
 import slimeknights.mantle.client.book.data.content.PageContent;
 import slimeknights.mantle.client.book.repository.BookRepository;
@@ -24,12 +26,45 @@ public class PageDataJS {
     private SectionDataJS parent;
 
     public PageDataJS(PageData origin) {
+        this(origin, origin.parent);
+    }
+    protected PageDataJS(PageData origin, @Nullable SectionData parent) {
         this.origin = origin;
-        this.parent = new SectionDataJS(this.origin.parent);
+        if (parent == null) {
+            this.parent = null;
+        } else {
+            this.parent = new SectionDataJS(parent);
+        }
     }
     protected PageDataJS(PageData origin, SectionDataJS parent) {
         this.origin = origin;
         this.parent = parent;
+    }
+
+    public static PageDataJS createNew(ResourceLocation type, Consumer<PageContent> operation) {
+        PageDataJS result = new PageDataJS(new PageData(true));
+        result.setType(type, operation);
+        return result;
+    }
+    public static PageDataJS createNew(ResourceLocation type) {
+        PageDataJS result = new PageDataJS(new PageData(true));
+        result.setType(type);
+        return result;
+    }
+
+    public static PageDataJS createNewCustom(String type, Object arguments) {
+        PageDataJS result = new PageDataJS(new PageData(true));
+        result.setCustomType(type, arguments);
+        return result;
+    }
+    public static PageDataJS createNewCustom(String type) {
+        return createNewCustom(type, new Object());
+    }
+
+    public static PageDataJS createEmpty() {
+        PageDataJS result = new PageDataJS(new PageData(true));
+        result.setType(ContentBlank.ID);
+        return result;
     }
 
     public void setType(ResourceLocation type) {
@@ -77,6 +112,11 @@ public class PageDataJS {
             this.parent.origin = this.origin.parent;
         }
         return this.parent;
+    }
+
+    public void setParent(SectionDataJS parent) {
+        this.origin.parent = parent.origin;
+        this.parent = parent;
     }
 
     @Info("Get the source repository of the page.")
