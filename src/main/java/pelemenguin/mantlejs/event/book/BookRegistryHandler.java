@@ -13,7 +13,7 @@ import pelemenguin.mantlejs.event.MantleJSEventGroup;
 @ParametersAreNonnullByDefault
 @EventBusSubscriber
 public class BookRegistryHandler {
-    public static void init() {
+    public static void initClient() {
 
         PageTypeRegistryEventJS pageTypeRegistrer = new PageTypeRegistryEventJS();
         MantleJSEventGroup.PAGE_TYPE_REGISTRY.post(pageTypeRegistrer);
@@ -29,7 +29,7 @@ public class BookRegistryHandler {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        init();
+        initClient();
     }
 
 }

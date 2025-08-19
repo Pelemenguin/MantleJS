@@ -15,6 +15,7 @@ public class PageTypeBuilder {
     public String id;
     public BuildFunction function;
 
+    @SuppressWarnings("removal")
     public PageTypeBuilder(String id) {
         this.id = KubeJS.appendModId(id);
         PAGE_TYPE_BUILDERS.put(new ResourceLocation(this.id), this);

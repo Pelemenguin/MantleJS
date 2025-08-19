@@ -9,6 +9,7 @@ import slimeknights.mantle.client.book.transformer.BookTransformer;
 
 public class BookInitialization extends BookData {
     
+    @SuppressWarnings("removal")
     public static void initBook() {
         for (String r : BookBuilder.BOOK_BUILDERS.keySet()) {
 
